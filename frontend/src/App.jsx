@@ -3,7 +3,7 @@ import AllTodo from './components/AllTodo'
 
 function App() {
   return (
-    <div>
+    <div className='container m-auto mt-10'>
       <AllTodo/>
     </div>
   )
