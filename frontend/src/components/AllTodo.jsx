@@ -9,7 +9,7 @@ function AllTodo() {
 
   const fetchData = useCallback(() => {
     axios
-      .get("http://localhost:3000/")
+      .get("https://backend-todo-4ygr.onrender.com/")
       .then((response) => {
         setTodos(response.data.todos);
       })
@@ -28,7 +28,7 @@ function AllTodo() {
     setTodos(updatedTodos);
 
     try {
-      await axios.put(`http://localhost:3000/${updatedTodos[index]._id}`, {
+      await axios.put(`https://backend-todo-4ygr.onrender.com/${updatedTodos[index]._id}`, {
         isDone: updatedTodos[index].done,
       });
     } catch (error) {
@@ -43,7 +43,7 @@ function AllTodo() {
     setTodos(updatedTodos);
 
     try {
-      await axios.delete(`http://localhost:3000/${deletedTodoId}`);
+      await axios.delete(`https://backend-todo-4ygr.onrender.com/${deletedTodoId}`);
     } catch (error) {
       console.error("Error deleting todo from the database:", error);
     }
@@ -59,7 +59,7 @@ function AllTodo() {
 
   const handleAddTask = async () => {
     try {
-      await axios.post("http://localhost:3000/", {
+      await axios.post("https://backend-todo-4ygr.onrender.com/", {
         title: title,
         description: description,
         done: false,
@@ -74,24 +74,33 @@ function AllTodo() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+      <div className="mb-4">
         <input
+          className="border-2 border-gray-300 p-2 w-full"
           type="text"
           placeholder="Add Title"
           value={title}
           onChange={handleTitleChange}
         />
+      </div>
+      <div className="mb-4">
         <input
+          className="border-2 border-gray-300 p-2 w-full"
           type="text"
           placeholder="Add Description"
           value={description}
           onChange={handleDescriptionChange}
         />
-        <button onClick={handleAddTask}>Add Task</button>
       </div>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+        onClick={handleAddTask}
+      >
+        Add Task
+      </button>
 
-      <h1>All Todos</h1>
+      <h1 className="text-2xl font-bold mt-8">All Todos</h1>
       <div>
         {todos.map((todo, index) => (
           <Todo
